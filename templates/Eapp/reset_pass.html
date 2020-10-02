@@ -1,0 +1,39 @@
+{% extends 'Eapp/base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row my-5">
+        <div class="col-lg-4 mx-auto bg-light shadow shadow-lg my-5">
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Email address</label>
+                    <input type="text" class="form-control" id="un">
+                 </div>
+                
+                <button type="button" class="btn btn-primary" onclick="resetpass()">Submit</button>
+            </form>
+
+            <script>
+                function resetpass(){
+                    let un = $("#un").val()
+                    let csrf = $("input[name=csrfmiddlewaretoken").val()
+                    $.ajax({
+                        url:"{% url 'resetpass' %}",
+                        type:'post',
+                        data:(username=un,csrf=csrf),
+                        success:function(data){
+                            alert(data)
+                        }
+                        
+                    })
+                }
+            </script>
+            
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

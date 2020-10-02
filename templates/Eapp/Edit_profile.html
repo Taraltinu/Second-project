@@ -1,0 +1,116 @@
+{% extends 'Eapp/base_dashbord.html'%}
+
+{% load static %}
+{% block mydash %}
+<div class="container">
+    <div class="row">
+        
+        <div class="col-md-10 mx-auto bg-img bg-light pt-5 pb-5">
+            <h1 class="text-center">Edit Profile</h1>
+            {% if stutas %}
+            
+            <p class="alert alert-success text-center">{{stutas}}</p>
+            {% endif %}
+
+            <div class="text-center">
+                {% if data.profil_pic %}
+                
+                <img src="/media/{{data.profil_pic}}" style="height: 110px; width: 110px; border-radius: 50%;">
+                {% else %}
+                <img src="{% static 'images/user.png' %}" style="height: 110px; width: 110px; border-radius: 50%;">
+                {% endif %}
+            </div>
+            <form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %} 
+                <div class="form-group">
+                   <div class="row">
+                       <div class="col-md-6">
+                           <label for="">First Name</label>
+                           <input type="text" name="fname" class="form-control" id="" value="{{user.first_name}}">
+                       </div>
+                       <div class="col-md-6">
+                        <label for="">Last Name</label>
+                        <input type="text" name="lname" class="form-control" value="{{user.last_name}}">
+                    </div>
+                    
+                   </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="">Contact Number</label>
+                            <input type="number" name="ucon" value="{{data.contact}}"  class="form-control" id="" pattern="[0-10]{10}" title="must be 10 digit" value="{{user.contcat}}">
+                        </div>
+                        <div class="col-md-6">
+                         <label for="">Age (in years)</label>
+                         <input type="number" name="uage"  value="{{data.age}}" class="form-control" id="" min="15",max=95 >
+                     </div>
+                     
+                    </div>
+                 </div>
+                 <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="">Email</label>
+                            <input type="email" name="email" class="form-control" id="" value="{{user.email}}">
+                        </div>
+                        <div class="col-md-6">
+                         <label for="">Profile Picture</label>
+                         <input type="file" name="image">
+                     </div>
+                     
+                    </div>
+                 </div>
+                 <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="">City</label>
+                            <input type="text" name="ucity"  class="form-control" id="" value="{{data.city}}">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="">Gender</label>
+                        <select  id="" name="ugen" class="form-control">
+                            
+                            <option value="Male" selected>Male</option>
+                           
+                            {% if data.gender == "Female" %}
+                            <option value="Female" selected>Female</option>
+                            {% else %}
+                            <option value="Female" >Female</option>
+                            {% endif %}
+
+                            {% if data.gender == "other"%}
+                            <option value="other" selected>Other</option>
+                            {% else %}
+                            <option value="other" >Other</option>
+                            {% endif %}
+
+
+                        </select>
+                     </div>
+                     
+                    </div>
+                 </div>
+                 <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="">Occupation</label>
+                            <input type="text" name="uocc" value="{{data.occupation}}" class="form-control" id="">
+                        </div>
+                        <div class="col-md-6">
+                         <label for="">About You</label>
+                            <textarea  id="" name="uabt" cols="40" rows="5">{{data.about}}</textarea>
+                        </div>
+                     
+                    </div>
+                 </div>
+                 <div class="float-right pr-5">
+                     <input type="submit" value="Save Profile" class="btn btn-outline-info">
+                 </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

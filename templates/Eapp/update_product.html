@@ -1,0 +1,96 @@
+{% extends 'Eapp/base_dashbord.html' %}
+
+{% block mydash %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 mx-auto my-5 bg-light">
+            <form action="" method="POST" enctype="multipart/form-data">
+                {% csrf_token %} 
+                <div class="row">
+                    <div class="col-md-12">
+                        <img src="/media/{{product.product_image}}" style="height: 300px; width: 350px;" alt="">
+                    </div>
+                </div>
+                <p  style="color: green; text-align: center; font-weight: bold;">{{msg}}</p>
+                <div class="row">
+                   
+                    <div class="col-md-6">
+                           <div class="form-group">
+                               <label for="exampleInput">Product Name</label>
+                               <input type="text" name="pdn" class="form-control" value="{{product.product_name}}">
+                           </div>  
+                    </div>
+                    <div class="col-md-6"> 
+                        <label for="exampleInput">Category Name</label>                                                      <div class="form-group">
+                           <select name="pcn" id="" class="form-control">
+                               {% for i in category %}
+                               {% if i.id == product.product_Cat.id %}
+                               <option value="{{i.id}}" selected>{{i.name}}</option>
+                               {% else %}
+                               <option value="{{i.id}}">{{i.name}}</option>
+                               {% endif %}
+                               {% endfor %}
+
+                           </select>
+                        </div>               
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="exampleInput">Price</label>
+                            <input type="number" name="price" class="form-control" value="{{product.product_price}}">
+                        </div>  
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="exampleInput">Sale Price</label>
+                            <input type="number" name="sprice" class="form-control" value="{{product.sale_price}}">
+                        </div>  
+                    </div>
+                    
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="exampleInput">Size</label>
+                            <input type="number" name="size" class="form-control"value="{{product.size}}" >
+                        </div>  
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="exampleInput">color</label>
+                            <input type="text" name="color" class="form-control" value="{{product.color}}">
+                        </div>  
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="exampleInput">Quality</label>
+                            <input type="text" name="quality" class="form-control" value="{{product.quality}}">
+                        </div>  
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="exampleInput">Image</label>
+                            <input type="file" name="pimg">
+                        </div>  
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="exampleInput">Description</label>
+                            <textarea name="desc" id="" class="form-control" rows="5">value="{{product.description}}"</textarea>                                                        </div>  
+                    </div>
+                </div>
+                <input type="submit" class="btn btn-outline-info float-center" style="margin-left: 300px;" value="Chnages Save">
+
+                </div>
+               </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

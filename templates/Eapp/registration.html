@@ -1,0 +1,85 @@
+{% extends 'Eapp/base.html' %}
+{% load static %}
+
+
+
+{% block content %}
+
+<div class="container">
+    <div class="row" style="background: url(static/images/1.png); border-radius: 20px ;">
+        <div class="col-md-6"></div>
+        <div class="col-md-6">
+            <div class="">
+                <h1 class="text-center text-uppercase">sign up here</h1>
+                <form method="POST" action="">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label >First Name</label>
+                        <input type="text" name="f_name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    </div>
+                    <div class="form-group">
+                        <label >Last Name</label>
+                        <input type="text" name="l_name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label >Username</label>
+                        <input type="text"  name="u_name" class="form-control"aria-describedby="emailHelp">
+                    </div>
+                    <p id="result"></p>
+                    <div class="form-group">
+                        <label >Email</label>
+                        <input type="email"  onkeyup="checkuser()" id="email"   name="email" class="form-control"  aria-describedby="emailHelp">
+                    </div>
+                    <div class="form-group">
+                        <label >Contact Number</label>
+                        <input type="number" id="contact" name="contact" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    </div>
+                    <div class="form-group">
+                        <label >Password</label>
+                        <input type="password" name="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Select your Account Type</label>
+                        <select class="form-control" name="type">
+                            <option value="cus">I am Customer</option>
+                            <option value="sel">I am Seller</option>
+
+                        </select>
+                        
+                    </div>
+                    <input type="submit" class="btn btn-primary" value="Sign Up" id="submitbtn">
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<script>
+    function checkuser(){
+        let  em =document.getElementById("email").value;
+       
+
+        $.ajax({
+            url : "{% url 'check_user' %}",
+            type:"get",
+            data:{email:em},
+            success:function(data){
+              if (data == "exist"){
+                  $("#result").html("Email address already Exist").addClass("text-danger")
+                  $("#submitbtn").attr("disabled","disabled")
+
+              } else{
+                  $("#result").html("")
+                  $("#submitbtn").removeAttr("disabled")
+              }
+
+            }
+            
+        })
+ 
+    }
+</script>
+
+{% endblock %}

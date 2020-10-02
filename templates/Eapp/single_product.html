@@ -1,0 +1,62 @@
+{% extends 'Eapp/base.html' %}
+
+
+{% block content %}
+<section class="product">
+
+    <div class="container">
+        <div class="row">
+        
+            <div class="col-lg-6 col-md-6 col-6 my-5">
+                <div class="float-left">
+                    <img src="/media/{{product.product_image}}" style="height: 50%; width: 50%;">
+                </div>
+               
+             </div>
+             <div class="col-lg-6 col-md-6 col-6 my-5">
+                <p>
+                    <h4>Market Price</h4>
+                    <del style="color: red;" >&#8377; {{product.product_price}}</del>
+                </p>
+                <p> 
+                    <h4>Offer Price</h4>
+                    <p style="color: green;">&#8377; {{product.sale_price}}
+
+                    <script>
+                        let t ="{{product.product_price}}";
+                        let st ="{{product.sale_price}}";
+                        let dis = 100-(st/t*100);
+                        document.write("<strong class='text-danger'>(Discount :  "+Math.round(dis,2)+"%)</strong>");
+        
+                    </script>
+                </p></p>
+                <button class="btn btn-info">Add To Cart</button>
+                <button class="btn btn-danger">Buy Now</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-6">
+                <h4>Quality</h4>
+                <p>{{product.quality}}</p>
+            </div>
+            <div class="col-lg-3 col-md-3 col-6">
+                <h4>Size</h4>
+                <p>{{product.size}}</p>
+            </div>
+            <div class="col-lg-3 col-md-3 col-6">
+                <h4>Color</h4>
+                <p>{{product.color}}</p>
+            </div>
+            <div class="col-lg-3 col-md-3 col-6">
+                <h4>Add Product Date</h4>
+                <p>{{product.add_date}}</p>
+            </div>
+            <div class="col-lg-3 col-md-3 col-6">
+                <h3 style="color: rgb(9, 241, 9);">Description</h3>
+                <p>{{product.description}}</p>
+            </div>
+        </div>
+    </div>
+
+</section>
+{% endblock %}

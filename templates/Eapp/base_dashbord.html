@@ -1,0 +1,70 @@
+{% extends "Eapp/base.html" %}
+{% load static %}
+
+{% block content %}
+{% if user.is_superuser %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-10 my-5 h-100">
+            <div class="jombotron h-100">
+                <h1 class="alert alert-danger">oops ! Sorry you'r not able for this page</h1>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2 bg-info">
+                <div class="navbar navbar-white">
+                    <a href="" class="navbar-brand">My Dashbord</a>
+                    <div class="text-center">
+                        {% if data.profil_pic%}
+                        
+                        <img src="/media/{{data.profil_pic}}" style="height:80px; width: 80px; border-radius: 50%;">
+                        {% else %}
+                        <img src="{% static 'images/user.png' %}" style="height: 80px; width: 80px; border-radius: 50%;">
+                        {% endif %}
+                    
+                    <p class="text-center text-uppercase">{{user.username}}</p>
+                </div>
+                <ul class="navbar nav">
+                    <!--tips: to change the .nav alignment use .justify-content-center,.justify-content-end or use .flex-column to vertical alignment-->
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'dashbord' %}">View Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'profile' %}">Edit Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'cpass' %}">Change Password</a>
+                    </li>
+                    {% if user.is_staff%}
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{% url 'add_product' %}">Add Product</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{% url 'my_product' %}">My  Product</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{% url 'sendemail' %}">Email</a>
+                    </li>
+                    {% endif %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-10">
+            {% block mydash %}
+            {% endblock %}
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

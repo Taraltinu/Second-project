@@ -1,0 +1,31 @@
+{% extends 'Eapp/base_dashbord.html' %}
+
+{% load static %}
+
+{% block mydash %}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 mx-auto shadow shadow-lg my-5 bg-light">
+            <div class="alert {{cls}}">{{msg}}</div>
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Email address</label>
+                    <input type="email" name="to" class="form-control"  placeholder="To">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">subject</label>
+                    <input type="text" name="sub" class="form-control"placeholder="Subject">
+                </div>
+                <div class="form-group">
+                   <label for="" >message</label>
+                   <textarea name="msg" rows="4"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">send email</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

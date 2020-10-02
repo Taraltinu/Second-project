@@ -1,0 +1,53 @@
+{% extends 'Eapp/base.html' %}
+
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        {% if user.is_superuser %}
+
+        <div class="jumbotron text-center my-5">
+            <h2 class="text-center">Sorry yor are not able here</h2>
+        </div>
+        {% else %}
+        {% if not  user.is_authenticated %}
+
+        <div class="jumbotron text-center my-5 mx-auto">
+            <h2 class="text-center ">Please Login</h2>
+        </div>
+        {% else %}
+        <div class="col-md-8 mx-auto my-5" style="box-shadow: 0px 0px 10px black;">
+            <table class="table">
+                <thead>
+                    <th>IMAGE</th>
+                    <th>NAME</th>
+                    <th>PRICE</th>
+                    <th>QUANTITY</th>
+                    <th>ACTION</th>
+
+                </thead>
+                <tbody>
+                    {% for i in items %}
+                    <tr>
+                        <td><img src="/media/{{i.product.product_image}}" style="height: 100px;" width="50px" alt=""></td>
+                        <td>{{i.product.product_name}}</td>
+                        <td><del style="color: red;"> &#8377;{{i.product.product_price}}</del>&#8377;{{i.product.sale_price}}</td>
+                        <td>{{i.quentity}}</td>
+                        <td><a href="#" class="btn btn-danger">&times; Delete</a></td>
+                        <td>{{items|cart_Quantity}}</td>
+                    </tr>
+
+                    {% endfor %}
+                </tbody>
+
+            </table>
+        </div>
+        {% endif %}
+        {% endif %}
+    </div>
+</div>
+
+
+
+{% endblock %}

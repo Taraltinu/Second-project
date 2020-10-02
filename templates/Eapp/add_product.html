@@ -1,0 +1,21 @@
+{% extends 'Eapp/base_dashbord.html' %}
+
+{% block mydash %}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 my-5 mx-auto">
+            {{msg}}
+                <form action="" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %} 
+                    <table class="table">
+                        {{form.as_table}}
+                    </table>
+                    <input type="submit" value="Add_product" class="btn btn-info">
+                </form>
+            
+        </div>
+    </div>
+</div>
+{% endblock %}

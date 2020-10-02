@@ -1,0 +1,45 @@
+{% extends 'Eapp/base.html' %}
+{% load static %}
+
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 m-3">
+            <form  action="" method="POST" novalidate>
+                {% csrf_token %}
+                <div class="form-group">
+                    <label >UserName</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <i class="fa fa-user"></i>
+                        </span>
+                     </div>
+                    <input type="text" name="username" class="form-control" id="exampleInputEmail1" >
+                 </div>
+                    <small id="emailHelp" class="form-text text-muted"></small>
+                </div>
+                <div class="form-group">
+                 <label for="exampleInputEmail1">Password</label>
+                 <div class="input-group">
+                     <div class="input-group-prepend">
+                     <span class="input-group-text">
+                         <i class="fa fa-key"></i>
+                     </span>
+                  </div>
+                 <input type="password" name="password" class="form-control">
+              </div>
+                 <small id="emailHelp" class="form-text text-muted"></small>
+             </div>
+                <input type="submit" class="btn btn-outline-info" value="Login">
+            </form>
+            <div class="text-center mr-auto">
+                <a href="{% url 'resetpass' %}" class="btn btn-outline-info">forgate password</a>
+            </div>
+        </div>
+                    
+
+    </div>
+</div>
+{% endblock %}

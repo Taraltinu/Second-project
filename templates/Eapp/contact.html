@@ -1,0 +1,61 @@
+{% extends 'Eapp/base.html' %}
+{% load static %}
+
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-5 offset-1 mt-5">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d24144.20555842104!2d73.05602039256671!3d24.217733138032134!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395d135a4e4b9373%3A0xf707821112973e63!2sMithi%20Bili%2C%20Gujarat!5e1!3m2!1sen!2sin!4v1600236260744!5m2!1sen!2sin" width="100%" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+        </div>
+        <div class="col-md-5 offset-1 mt-5">
+            <form action="" method="POST">
+                {% csrf_token %}
+            <div class="form-group">
+                <label for="exampleInput">Fullname</label>
+                <input type="text" name="fullname" class="form-control" id="exampleInput">
+            </div>
+            <div class="form-group">
+                <label for="exampleInput">Mobile</label>
+                <input type="number" name="mobile" class="form-control" id="exampleInput">
+            </div>
+            <div class="form-group">
+                <label for="exampleInput">Subject</label>
+                <input type="text" name="subject" class="form-control" id="exampleInput">
+            </div>
+            <div class="form-group">
+                <label for="exampleInput">Message</label>
+                <textarea  name="message" class="form-control" id="exampleInput" rows="3"></textarea>
+            </div>
+            <input type="submit" value="Send" class="btn btn-md btn-outline-info display-6">
+            </form>
+        </div>
+
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Fullname</th>
+                <th>mobile</th>
+                <th>subject</th>
+                <th>message</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for fd in feedback %}
+            <tr>
+                <td>{{fd.fullname}}</td>
+                <td>{{fd.mobile}}</td>
+
+                <td>{{fd.subject}}</td>
+
+                <td>{{fd.message}}</td>
+
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock%}

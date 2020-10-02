@@ -1,0 +1,96 @@
+{% extends 'Eapp/base_dashbord.html' %}
+
+
+{% block mydash %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-10">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Image</th>
+                        <th>NAME</th>
+                        <th>CATEGORY</th>
+                        <th>PRICE</th>
+                        <th>SALE_P</th>
+                        <th>ACTIONS</th>
+                    </tr>
+                    <tbody>
+                        {% for pd in product %}
+                        <tr>
+                            <td>{{pd.id}}</td>
+                            <td><img src="/media/{{pd.product_image}}" style="height: 80px; width: 80px;" alt=""></td>
+                            <td>{{pd.product_name}}</td>
+                            <td>{{pd.product_Cat}}</td>
+                            <td>{{pd.product_price}}</td>
+                            <td>{{pd.sale_price}}</td>
+                            <td>
+                                <a href=""  class="btn btn-info" data-toggle="modal" data-target="#m{{pd.id}}"><i class="fa fa-eye "></i></a>
+                                <a href="{% url 'update_product' %}?uid={{pd.id}}" class="btn btn-success"><i class="fa fa-edit "></i></a>
+                                <a href="" data-toggle="modal" data-target="#n{{pd.id}}" class="btn btn-danger"><i class="fa fa-trash "></i></a>
+                            </td>
+
+                        </tr>
+                        <div class="modal" id="n{{pd.id}}">
+                                
+                            <div class="modal-dailog modal-lg">
+                                <div class="modal-content text-center">
+                                    <div class="modal-header display-4">Delete Product</div>
+                                        <div class="modal-body">
+                                            <div class="float-right">
+                                                <img src="/media/{{pd.product_image}}" class="w-50 h-50 float-left" alt="">
+                                            
+                                            </div>  
+                                            
+                                            <a href="{% url 'my_product' %}" class=" my-4 btn btn-outline-info">Cancel</a>
+
+                                    
+                                        
+                                            <a href="{% url 'delete_product' %}?pid={{pd.id}}" class="my-4 btn btn-outline-danger">Are you Sure ?</a>
+
+                                        
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                            <div class="modal" id="m{{pd.id}}">
+                                
+                                <div class="modal-dailog modal-lg">
+                                    <div class="modal-content text-center">
+                                        <div class="modal-header display-4"> My Product</div>
+                                            <div class="modal-body">
+                                                <div class="float-left">
+                                                    <img src="/media/{{pd.product_image}}" class="w-50 h-50 float-left" alt="">
+                                                
+                                                    <div class="text-center">
+                                                        <p >
+                                                            <p>Product Price</p>
+                                                            <del style="color: red;" >&#8377; {{pd.product_price}}</del>
+                                                        </p>
+                                                        <p> 
+                                                            <p>Sale Price</p>
+                                                            <strong style="color: green;">&#8377; {{pd.sale_price}}</strong>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="float-left mt-5">
+                                                {{pd.description}}
+                                                </div>
+                                                <div>
+                                                    <a href="{% url 'single_product' %}?pid={{pd.id}}">See More >></a>
+                                                </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </tbody>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
